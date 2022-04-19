@@ -4,11 +4,6 @@ on:
   push:
     branches:
     - main
-    tags:
-    - 'v*'
-  pull_request:
-    branches:
-    - main
 
 jobs:
   first-job:
@@ -17,31 +12,14 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-    - name: 'Say Hello World 1'
-      shell: pwsh
+    - name: Send message to Webex Space
+      shell: bash
       run: |
-        echo "hello world from first job"
-
-  second-job:
-    name: 'Second Job'
-    needs: first-job
-
-    runs-on: 'ubuntu-latest'
-
-    steps:
-    - name: 'Say Hello World 2'
-      shell: pwsh
-      run: |
-        echo "hello world from second job"
-
-  third-job:
-    name: 'Third Job'
-    needs: second-job
-
-    runs-on: 'ubuntu-latest'
-
-    steps:
-    - name: 'Say Hello World 3'
-      shell: pwsh
-      run: |
-        echo "hello world from third job"
+        curl --location --request POST 'https://webexapis.com/v1/messages' \
+        --header "Authorization: Bearer ${{ secrets.WEBEX_TOKEN }}" \
+        --header "Content-Type: application/json" \
+        --data-raw '{
+          "roomId": "${{ secrets.WEBEX_ROOM_ID }}",
+          "text": "Message sent by GitHub Actions from ${{ github.repository }}",
+          "markdown": "Message sent by **GitHub Actions** from `${{ github.repository }}`"
+        }'
