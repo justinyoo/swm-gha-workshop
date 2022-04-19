@@ -2,9 +2,6 @@ name: 'SWM GitHub Actions Basic'
 
 on: push
 
-env:
-  PRESET_VALUE: "This is PRESET value"
-
 jobs:
   first-job:
     name: 'First Job'
@@ -12,24 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 'Set environment variable 1'
+    - name: 'Set output value'
+      id: first
       shell: bash
       run: |
         var_1="This is the value 1 in the step 1"
 
-        echo "STEPSET_VALUE_1=$var_1" >> $GITHUB_ENV
+        echo "::set-output name=first_value::$var_1"
 
-    - name: 'Say Hello World 2'
+    - name: 'Check output value'
       shell: pwsh
       run: |
-        $var_2 = "This is the value 2 in the step 2"
-
-        echo "STEPSET_VALUE_2=$var_2" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
-
-    - name: Check environment variables
-      shell: bash
-      run: |
-        echo "preset value: ${{ env.PRESET_VALUE }}"
-        echo "stepset value 1: ${{ env.STEPSET_VALUE_1 }}"
-        echo "stepset value 2: ${{ env.STEPSET_VALUE_2 }}"
-      
+        echo ${{ steps.first.outputs.first_value }}
