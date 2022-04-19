@@ -20,4 +20,4 @@ jobs:
     - name: 'Check output value'
       shell: pwsh
       run: |
-        echo ${{ steps.first.outputs.first_value }}
+        echo "${{ steps.first.outputs.first_value }}"
