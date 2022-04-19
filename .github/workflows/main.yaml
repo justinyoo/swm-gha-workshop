@@ -14,24 +14,22 @@ jobs:
   first-job:
     name: 'First Job'
 
-    strategy:
-      matrix:
-        os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest' ]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: 'ubuntu-latest'
 
     steps:
-    - name: 'Set output value'
-      id: first
-      shell: bash
-      run: |
-        var_1="This is the value: hello world"
-
-        echo "::set-output name=first_value::$var_1"
-
-    - name: 'Check output value on ${{ matrix.os }}'
-      if: matrix.os == 'ubuntu-latest'
+    - name: 'Say Hello World 1'
       shell: pwsh
       run: |
-        echo "${{ steps.first.outputs.first_value }}"
+        echo "hello world from first job"
 
+  second-job:
+    name: 'Second Job'
+    needs: first-job
+
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - name: 'Say Hello World 2'
+      shell: pwsh
+      run: |
+        echo "hello world from second job"
