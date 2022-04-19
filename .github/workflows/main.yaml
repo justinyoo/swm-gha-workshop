@@ -15,6 +15,7 @@ jobs:
       run: |
         var_1="This is the value 1 in the step 1"
 
+        echo "::add-mask::$var_1"
         echo "::set-output name=first_value::$var_1"
 
     - name: 'Check output value'
