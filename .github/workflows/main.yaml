@@ -33,3 +33,15 @@ jobs:
       shell: pwsh
       run: |
         echo "hello world from second job"
+
+  third-job:
+    name: 'Third Job'
+    needs: first-job
+
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - name: 'Say Hello World 3'
+      shell: pwsh
+      run: |
+        echo "hello world from third job"
