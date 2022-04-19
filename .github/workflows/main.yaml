@@ -5,12 +5,10 @@ on: [ 'push', 'pull_request' ]
 jobs:
   first-job:
     name: 'First Job'
-    if: github.event_name == 'push'
 
     strategy:
       matrix:
         os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest' ]
-        message: [ 'HELLO WORLD', 'LOREM IPSUM' ]
 
     runs-on: ${{ matrix.os }}
 
@@ -19,11 +17,12 @@ jobs:
       id: first
       shell: bash
       run: |
-        var_1="This is the value: ${{ matrix.message }}"
+        var_1="This is the value: hello world"
 
         echo "::set-output name=first_value::$var_1"
 
     - name: 'Check output value on ${{ matrix.os }}'
+      if: matrix.os == 'ubuntu-latest'
       shell: pwsh
       run: |
         echo "${{ steps.first.outputs.first_value }}"
