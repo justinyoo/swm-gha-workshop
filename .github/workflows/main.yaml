@@ -1,0 +1,20 @@
+name: 'SWM GitHub Actions Basic'
+
+on: push
+
+jobs:
+  first-job:
+    name: 'First Job'
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 'Say Hello World 1'
+      shell: bash
+      run: |
+        echo "Hello World from step 1"
+
+    - name: 'Say Hello World 2'
+      shell: pwsh
+      run: |
+        echo "Hello World from step 2"
