@@ -3,7 +3,7 @@ name: 'SWM GitHub Actions Basic'
 on: push
 
 env:
-  WORKFLOW_LEVEL: "This value comes from the WORKFLOW level"
+  PRESET_VALUE: "This is PRESET value"
 
 jobs:
   first-job:
@@ -11,67 +11,25 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      JOB_LEVEL_1: "This value comes from the JOB level 1"
-
     steps:
-    - name: 'Say Hello World 1'
+    - name: 'Set environment variable 1'
       shell: bash
-      env:
-        STEP_LEVEL_11: "This value comes from the STEP level 11"
       run: |
-        echo "WORKFLOW: $WORKFLOW_LEVEL"
-        echo "JOB 1: $JOB_LEVEL_1"
-        echo "JOB 2: $JOB_LEVEL_2"
-        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
+        var_1="This is the value 1 in the step 1"
+
+        echo "STEPSET_VALUE_1=$var_1" >> $GITHUB_ENV
 
     - name: 'Say Hello World 2'
       shell: pwsh
-      env:
-        STEP_LEVEL_12: "This value comes from the STEP level 12"
       run: |
-        echo "WORKFLOW: $env:WORKFLOW_LEVEL"
-        echo "JOB 1: $env:JOB_LEVEL_1"
-        echo "JOB 2: $env:JOB_LEVEL_2"
-        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
+        $var_2 = "This is the value 2 in the step 2"
 
-  second-job:
-    name: 'Second Job'
+        echo "STEPSET_VALUE_2=$var_2" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
 
-    runs-on: ubuntu-latest
-
-    env:
-      JOB_LEVEL_2: "This value comes from the JOB level 2"
-
-    steps:
-    - name: 'Say Hello World 1'
+    - name: Check environment variables
       shell: bash
-      env:
-        STEP_LEVEL_21: "This value comes from the STEP level 21"
       run: |
-        echo "WORKFLOW: $WORKFLOW_LEVEL"
-        echo "JOB 1: $JOB_LEVEL_1"
-        echo "JOB 2: $JOB_LEVEL_2"
-        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
-
-    - name: 'Say Hello World 2'
-      shell: pwsh
-      env:
-        STEP_LEVEL_22: "This value comes from the STEP level 22"
-      run: |
-        echo "WORKFLOW: $env:WORKFLOW_LEVEL"
-        echo "JOB 1: $env:JOB_LEVEL_1"
-        echo "JOB 2: $env:JOB_LEVEL_2"
-        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
+        echo "preset value: ${{ env.PRESET_VALUE }}"
+        echo "stepset value 1: ${{ env.STEPSET_VALUE_1 }}"
+        echo "stepset value 2: ${{ env.STEPSET_VALUE_2 }}"
+      
