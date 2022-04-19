@@ -36,7 +36,7 @@ jobs:
 
   third-job:
     name: 'Third Job'
-    needs: first-job
+    needs: second-job
 
     runs-on: 'ubuntu-latest'
 
