@@ -1,0 +1,40 @@
+name: Send Webex Message to Room
+author: Justin Yoo
+description: Send a message to the given room on Webex
+
+branding:
+  icon: message-circle
+  color: orange
+
+inputs:
+  webexToken:
+    description: API token for Webex.
+    required: true
+  webexRoomId:
+    description: Space/Room ID on Webex.
+    required: true
+  bodyText:
+    description: Message in plain text format.
+    required: false
+    default: ''
+  bodyMarkdown:
+    description: Message in markdown format.
+    required: false
+    default: ''
+
+outputs:
+  response:
+    description: Response from Webex
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+  - --api-key
+  - ${{ inputs.webexToken }}
+  - --room-id
+  - ${{ inputs.webexRoomId }}
+  - --text
+  - ${{ inputs.bodyText }}
+  - --markdown
+  - ${{ inputs.bodyMarkdown }}

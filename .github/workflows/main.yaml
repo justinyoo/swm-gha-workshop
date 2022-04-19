@@ -13,13 +13,19 @@ jobs:
 
     steps:
     - name: Send message to Webex Space
-      shell: bash
-      run: |
-        curl --location --request POST 'https://webexapis.com/v1/messages' \
-        --header "Authorization: Bearer ${{ secrets.WEBEX_TOKEN }}" \
-        --header "Content-Type: application/json" \
-        --data-raw '{
-          "roomId": "${{ secrets.WEBEX_ROOM_ID }}",
-          "text": "Message sent by GitHub Actions from ${{ github.repository }}",
-          "markdown": "Message sent by **GitHub Actions** from `${{ github.repository }}`"
-        }'
+      uses: ./
+      with:
+        webexToken: ${{ secrets.WEBEX_TOKEN }}
+        webexRoomId: ${{ secrets.WEBEX_ROOM_ID }}
+        bodyText: "Message sent by GitHub Actions from ${{ github.repository }}"
+        bodyMarkdown: "Message sent by **GitHub Actions** from `${{ github.repository }}`"
+      # shell: bash
+      # run: |
+      #   curl --location --request POST 'https://webexapis.com/v1/messages' \
+      #   --header "Authorization: Bearer ${{ secrets.WEBEX_TOKEN }}" \
+      #   --header "Content-Type: application/json" \
+      #   --data-raw '{
+      #     "roomId": "${{ secrets.WEBEX_ROOM_ID }}",
+      #     "text": "Message sent by GitHub Actions from ${{ github.repository }}",
+      #     "markdown": "Message sent by **GitHub Actions** from `${{ github.repository }}`"
+      #   }'
