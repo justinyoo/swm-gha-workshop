@@ -20,26 +20,26 @@ jobs:
       env:
         STEP_LEVEL_11: "This value comes from the STEP level 11"
       run: |
-        echo "WORKFLOW: ${{ env:WORKFLOW_LEVEL }}"
-        echo "JOB 1: ${{ env:JOB_LEVEL_1 }}"
-        echo "JOB 2: ${{ env:JOB_LEVEL_2 }}"
-        echo "STEP 11: ${{ env:STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env:STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env:STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env:STEP_LEVEL_22 }}"
+        echo "WORKFLOW: $WORKFLOW_LEVEL"
+        echo "JOB 1: $JOB_LEVEL_1"
+        echo "JOB 2: $JOB_LEVEL_2"
+        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
+        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
+        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
+        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
 
     - name: 'Say Hello World 2'
       shell: pwsh
       env:
         STEP_LEVEL_12: "This value comes from the STEP level 12"
       run: |
-        echo "WORKFLOW: ${{ env:WORKFLOW_LEVEL }}"
-        echo "JOB 1: ${{ env:JOB_LEVEL_1 }}"
-        echo "JOB 2: ${{ env:JOB_LEVEL_2 }}"
-        echo "STEP 11: ${{ env:STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env:STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env:STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env:STEP_LEVEL_22 }}"
+        echo "WORKFLOW: $env:WORKFLOW_LEVEL"
+        echo "JOB 1: $env:JOB_LEVEL_1"
+        echo "JOB 2: $env:JOB_LEVEL_2"
+        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
+        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
+        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
+        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
 
   second-job:
     name: 'Second Job'
@@ -55,23 +55,23 @@ jobs:
       env:
         STEP_LEVEL_21: "This value comes from the STEP level 21"
       run: |
-        echo "WORKFLOW: ${{ env:WORKFLOW_LEVEL }}"
-        echo "JOB 1: ${{ env:JOB_LEVEL_1 }}"
-        echo "JOB 2: ${{ env:JOB_LEVEL_2 }}"
-        echo "STEP 11: ${{ env:STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env:STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env:STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env:STEP_LEVEL_22 }}"
+        echo "WORKFLOW: $WORKFLOW_LEVEL"
+        echo "JOB 1: $JOB_LEVEL_1"
+        echo "JOB 2: $JOB_LEVEL_2"
+        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
+        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
+        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
+        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
 
     - name: 'Say Hello World 2'
       shell: pwsh
       env:
         STEP_LEVEL_22: "This value comes from the STEP level 22"
       run: |
-        echo "WORKFLOW: ${{ env:WORKFLOW_LEVEL }}"
-        echo "JOB 1: ${{ env:JOB_LEVEL_1 }}"
-        echo "JOB 2: ${{ env:JOB_LEVEL_2 }}"
-        echo "STEP 11: ${{ env:STEP_LEVEL_11 }}"
-        echo "STEP 12: ${{ env:STEP_LEVEL_12 }}"
-        echo "STEP 21: ${{ env:STEP_LEVEL_21 }}"
-        echo "STEP 22: ${{ env:STEP_LEVEL_22 }}"
+        echo "WORKFLOW: $env:WORKFLOW_LEVEL"
+        echo "JOB 1: $env:JOB_LEVEL_1"
+        echo "JOB 2: $env:JOB_LEVEL_2"
+        echo "STEP 11: ${{ env.STEP_LEVEL_11 }}"
+        echo "STEP 12: ${{ env.STEP_LEVEL_12 }}"
+        echo "STEP 21: ${{ env.STEP_LEVEL_21 }}"
+        echo "STEP 22: ${{ env.STEP_LEVEL_22 }}"
